@@ -21,6 +21,7 @@ function addBook(){
 }
 
 function addToList(book) {
+        if (!validate()) {return;}
 		var newElement = document.createElement("li");
 		var bookNameDiv = document.createElement("div");
 		bookNameDiv.innerHTML = book.bookName;
@@ -36,4 +37,36 @@ function addToList(book) {
 		newElement.appendChild(scoreDiv);
 		var ul = document.getElementById("bookList");
 		ul.appendChild(newElement);
+}
+
+function validate() {
+        var err = '';
+        var bookName = document.getElementById('bookName').value;
+        var authorName = document.getElementById('authorName').value;
+        var score = document.getElementById('score').value;
+        if (bookName=='' | authorName=='' | score=='') {
+            err = "You must fill in all fields";
+        }
+        if (isNaN(score)) {
+            err += "\n score must be a number";
+        }
+        if (score > 10 | score < 1 ){
+            err += "\n Score must be between 1 and 10";
+        }
+        if (err=='') {
+            return true;
+        } else {
+                alert(err);
+                return false;
+        }
+}
+
+function resetList() {
+    var theList = document.getElementById("bookList");
+    theList.innerHTML = '';
+/*  original idea
+    while (theList.firstChild) {
+        theList.removeChild(theList.firstChild);
+    }
+*/
 }
