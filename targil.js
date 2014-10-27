@@ -30,11 +30,16 @@ function removeItem(e) {
 }
 
 function editItem(e) {
-	div1 = e.target.parentElement.firstChild;
-	newEdit = document.createElement("input");
+	div1 = e.target.parentElement.children[0];
+	if (div1.) //check for child
+    newEdit = document.createElement("input");
+	newEdit.setAttribute("id", "newEdit");
 	newEdit.setAttribute("type", "text");
-	div1.appendChild(newEdit)
-	newEdit.value==div1.innerHTML;
+	newEdit.setAttribute("value", div1.innerHTML);
+	newEdit.setAttribute("", div1.innerHTML);
+    div1.innerHTML = '';
+	div1.appendChild(newEdit);
+    document.getElementById("newEdit").focus();
 }
 
 function addToList(book) {
@@ -50,13 +55,14 @@ function addToList(book) {
 		scoreDiv.className = "right";
 		var editItem = document.createElement("span");
 		editItem.innerHTML = "Edit";
-		editItem.setAttribute("onclick", "EditItem(event)");
+		editItem.setAttribute("onclick", "editItem(event)");
 		var x = document.createElement("span");
 		x.innerHTML = "X";
 		x.setAttribute("onclick", "removeItem(event)");
 		newElement.appendChild(bookNameDiv);
 		newElement.appendChild(authorNameDiv);
 		newElement.appendChild(scoreDiv);
+		newElement.appendChild(editItem);
 		newElement.appendChild(x);
 		var ul = document.getElementById("bookList");
 		ul.appendChild(newElement);
