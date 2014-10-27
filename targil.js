@@ -29,6 +29,14 @@ function removeItem(e) {
 	e.target.parentElement.remove();
 }
 
+function editItem(e) {
+	div1 = e.target.parentElement.firstChild;
+	newEdit = document.createElement("input");
+	newEdit.setAttribute("type", "text");
+	div1.appendChild(newEdit)
+	newEdit.value==div1.innerHTML;
+}
+
 function addToList(book) {
 		var newElement = document.createElement("li");
 		var bookNameDiv = document.createElement("div");
@@ -40,9 +48,11 @@ function addToList(book) {
 		var scoreDiv = document.createElement("div");
 		scoreDiv.innerHTML = book.score;
 		scoreDiv.className = "right";
+		var editItem = document.createElement("span");
+		editItem.innerHTML = "Edit";
+		editItem.setAttribute("onclick", "EditItem(event)");
 		var x = document.createElement("span");
 		x.innerHTML = "X";
-		//x.onclick = removeItem;
 		x.setAttribute("onclick", "removeItem(event)");
 		newElement.appendChild(bookNameDiv);
 		newElement.appendChild(authorNameDiv);
