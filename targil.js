@@ -20,12 +20,18 @@ function addBook(){
 	reset();
 }
 
+function clearList() {
+    var theList = document.getElementById("bookList");
+    theList.innerHTML = '';
+}
+
+function removeItem(e) {
+	e.target.parentElement.remove();
+}
+
 function addToList(book) {
-        if (!validate()) {return;}
 		var newElement = document.createElement("li");
-        liCount = getElementById('bookList').lastChild
-		newElement.setAttribute("id", "li" + last);
-        var bookNameDiv = document.createElement("div");
+		var bookNameDiv = document.createElement("div");
 		bookNameDiv.innerHTML = book.bookName;
 		bookNameDiv.className = "left";
 		var authorNameDiv = document.createElement("div");
@@ -34,22 +40,18 @@ function addToList(book) {
 		var scoreDiv = document.createElement("div");
 		scoreDiv.innerHTML = book.score;
 		scoreDiv.className = "right";
-		var xDiv = document.createElement("div");
-		xDiv.innerHTML = '<button style="background: url(dialog-close-2.png)" onclick="delItem($(this).parent().index())">x</button>';
-		xDiv.className = "right";
+		var x = document.createElement("span");
+		x.innerHTML = "X";
+		//x.onclick = removeItem;
+		x.setAttribute("onclick", "removeItem(event)");
 		newElement.appendChild(bookNameDiv);
 		newElement.appendChild(authorNameDiv);
 		newElement.appendChild(scoreDiv);
-		newElement.appendChild(xDiv);
+		newElement.appendChild(x);
 		var ul = document.getElementById("bookList");
 		ul.appendChild(newElement);
 }
 
-function delItem(index) {
-        alert("index is :" + index);
-        var list=document.getElementById("bookList");
-        list.removeChild(list.childNodes[index]);
-}
 
 function validate() {
         var err = '';
@@ -73,12 +75,3 @@ function validate() {
         }
 }
 
-function resetList() {
-    var theList = document.getElementById("bookList");
-    theList.innerHTML = '';
-/*  original idea
-    while (theList.firstChild) {
-        theList.removeChild(theList.firstChild);
-    }
-*/
-}
